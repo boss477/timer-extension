@@ -35,7 +35,7 @@ export default function SoundSettings({ settings, onChange }: SoundSettingsProps
   };
 
   return (
-    <div className="absolute top-full left-0 right-0 bg-black rounded-lg shadow-lg mt-2 p-3 space-y-3">
+    <div className="absolute top-full left-0 right-0 bg-[#111] rounded-lg shadow-lg mt-2 p-3 space-y-3">
       <div className="flex items-center justify-between">
         <span className="text-sm text-gray-200">Sound Effects</span>
         <button
@@ -65,7 +65,7 @@ export default function SoundSettings({ settings, onChange }: SoundSettingsProps
           <select
             value={settings.tickInterval}
             onChange={(e) => onChange({ ...settings, tickInterval: parseInt(e.target.value) })}
-            className="w-full bg-gray-800 text-white rounded text-xs p-1"
+            className="w-full bg-gray-900 text-white rounded text-xs p-1"
           >
             <option value="1">Every second</option>
             <option value="2">Every 2 seconds</option>
@@ -79,7 +79,7 @@ export default function SoundSettings({ settings, onChange }: SoundSettingsProps
             <select
               value={settings.soundType}
               onChange={(e) => onChange({ ...settings, soundType: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded text-xs p-1"
+              className="w-full bg-gray-900 text-white rounded text-xs p-1"
             >
               <option value="paper">Paper Flip</option>
               <option value="clock">Clock Tick</option>
@@ -102,7 +102,7 @@ export default function SoundSettings({ settings, onChange }: SoundSettingsProps
             <select
               value={settings.endSoundType}
               onChange={(e) => onChange({ ...settings, endSoundType: e.target.value })}
-              className="w-full bg-gray-800 text-white rounded text-xs p-1"
+              className="w-full bg-gray-900 text-white rounded text-xs p-1"
             >
               <option value="trumpet">Trumpet Fanfare</option>
               <option value="bell">Bell Ring</option>

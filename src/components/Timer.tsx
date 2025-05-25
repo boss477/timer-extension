@@ -151,7 +151,7 @@ export default function Timer() {
   const handleTimeSet = (seconds: number) => {
     setTime(seconds);
     setShowSettings(false);
-    setIsRunning(true); // Automatically start the timer when time is set
+    setIsRunning(true);
   };
 
   return (
@@ -166,7 +166,7 @@ export default function Timer() {
     >
       <div
         onMouseDown={handleMouseDown}
-        className={`bg-black rounded-xl shadow-lg p-3 transition-all duration-300 ${
+        className={`bg-[#111] rounded-xl shadow-lg p-3 transition-all duration-300 ${
           isDragging ? 'cursor-grabbing' : 'cursor-grab'
         } ${time === 0 ? 'animate-pulse' : ''}`}
         style={{ width: '160px' }}

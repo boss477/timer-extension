@@ -8,7 +8,7 @@ export default function TimerSettings({ onTimeSet }: TimerSettingsProps) {
   const presetTimes = [1, 3, 5, 10, 15, 30];
 
   return (
-    <div className="absolute top-full left-0 right-0 bg-black rounded-lg shadow-lg mt-2 p-3">
+    <div className="absolute top-full left-0 right-0 bg-[#111] rounded-lg shadow-lg mt-2 p-3">
       <div className="space-y-1">
         {presetTimes.map((mins) => (
           <button

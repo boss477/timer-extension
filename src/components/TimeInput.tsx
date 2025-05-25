@@ -37,7 +37,7 @@ export default function TimeInput({ onTimeSet }: TimeInputProps) {
           min="0"
           max="59"
           placeholder="Min"
-          className="w-full px-2 py-0.5 bg-gray-800 text-white rounded text-xs"
+          className="w-full px-2 py-0.5 bg-gray-900 text-white rounded text-xs"
           onKeyDown={handleKeyDown}
         />
       </div>
@@ -48,7 +48,7 @@ export default function TimeInput({ onTimeSet }: TimeInputProps) {
           min="0"
           max="59"
           placeholder="Sec"
-          className="w-full px-2 py-0.5 bg-gray-800 text-white rounded text-xs"
+          className="w-full px-2 py-0.5 bg-gray-900 text-white rounded text-xs"
           onKeyDown={handleKeyDown}
         />
       </div>
