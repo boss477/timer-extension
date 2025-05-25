@@ -21,8 +21,9 @@ interface SoundSettings {
 }
 
 export default function Timer() {
-  const [time, setTime] = useState(300);
+  const [time, setTime] = useState(360); // 6 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 20, y: 20 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
@@ -78,12 +79,13 @@ export default function Timer() {
   }, [soundSettings]);
 
   useEffect(() => {
-    if (isRunning && time > 0) {
+    if (isRunning && !isPaused && time > 0) {
       timerRef.current = window.setInterval(() => {
         setTime((prevTime) => {
           if (prevTime <= 1) {
             clearInterval(timerRef.current);
             setIsRunning(false);
+            setIsPaused(false);
             if (soundSettings.enabled && endSoundRef.current) {
               endSoundRef.current.currentTime = 0;
               endSoundRef.current.play().catch(() => {});
@@ -104,7 +106,7 @@ export default function Timer() {
       }, 1000);
     }
     return () => clearInterval(timerRef.current);
-  }, [isRunning, soundSettings]);
+  }, [isRunning, isPaused, soundSettings]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (containerRef.current) {
@@ -143,15 +145,29 @@ export default function Timer() {
 
   const toggleTimer = () => {
     if (time === 0) {
-      setTime(300);
+      setTime(360);
     }
     setIsRunning(!isRunning);
+    setIsPaused(false);
+  };
+
+  const handlePause = () => {
+    setIsPaused(true);
+    clearInterval(timerRef.current);
+  };
+
+  const handleReset = () => {
+    clearInterval(timerRef.current);
+    setTime(360);
+    setIsRunning(false);
+    setIsPaused(false);
   };
 
   const handleTimeSet = (seconds: number) => {
     setTime(seconds);
     setShowSettings(false);
     setIsRunning(true);
+    setIsPaused(false);
   };
 
   return (
@@ -168,7 +184,9 @@ export default function Timer() {
         onMouseDown={handleMouseDown}
         className={`bg-[#111] rounded-xl shadow-lg p-3 transition-all duration-300 ${
           isDragging ? 'cursor-grabbing' : 'cursor-grab'
-        } ${time === 0 ? 'animate-pulse' : ''}`}
+        } ${time === 0 ? 'animate-pulse' : ''} ${
+          isRunning && !isPaused ? 'scale-90' : 'scale-100'
+        }`}
         style={{ width: '160px' }}
       >
         <TimerDisplay
@@ -189,7 +207,10 @@ export default function Timer() {
         
         <TimerControls
           isRunning={isRunning}
+          isPaused={isPaused}
           onToggle={toggleTimer}
+          onPause={handlePause}
+          onReset={handleReset}
         />
 
         {showSettings && (
