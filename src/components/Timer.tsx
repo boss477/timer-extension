@@ -151,7 +151,7 @@ export default function Timer() {
   const handleTimeSet = (seconds: number) => {
     setTime(seconds);
     setShowSettings(false);
-    setIsRunning(false);
+    setIsRunning(true); // Automatically start the timer when time is set
   };
 
   return (
