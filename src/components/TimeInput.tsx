@@ -19,15 +19,6 @@ export default function TimeInput({ onTimeSet }: TimeInputProps) {
     e.currentTarget.reset();
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const form = e.currentTarget.form;
-      if (form) {
-        form.requestSubmit();
-      }
-    }
-  };
-
   return (
     <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-1 mb-2">
       <div>
@@ -38,7 +29,11 @@ export default function TimeInput({ onTimeSet }: TimeInputProps) {
           max="59"
           placeholder="Min"
           className="w-full px-2 py-0.5 bg-gray-900 text-white rounded text-xs"
-          onKeyDown={handleKeyDown}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.currentTarget.form?.requestSubmit();
+            }
+          }}
         />
       </div>
       <div>
@@ -49,9 +44,16 @@ export default function TimeInput({ onTimeSet }: TimeInputProps) {
           max="59"
           placeholder="Sec"
           className="w-full px-2 py-0.5 bg-gray-900 text-white rounded text-xs"
-          onKeyDown={handleKeyDown}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.currentTarget.form?.requestSubmit();
+            }
+          }}
         />
       </div>
+      <button type="submit" className="col-span-2 w-full px-2 py-0.5 bg-gray-900 hover:bg-gray-800 text-white rounded text-xs mt-1">
+        Set Timer
+      </button>
     </form>
   );
 }
